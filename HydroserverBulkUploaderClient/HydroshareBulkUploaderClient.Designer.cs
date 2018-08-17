@@ -61,11 +61,47 @@ namespace HydroserverBulkUploaderClient {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://dev-hydroserverbulkuploaderapi.azurewebsites.net/.
+        /// </summary>
+        internal static string azure_BulkUploadBaseAddress {
+            get {
+                return ResourceManager.GetString("azure_BulkUploadBaseAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to https://localhost:44364/.
         /// </summary>
         internal static string BulkUploadApiBaseAddress {
             get {
                 return ResourceManager.GetString("BulkUploadApiBaseAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://localhost:15423/.
+        /// </summary>
+        internal static string HydroServerBulkUploadApiBaseAddress {
+            get {
+                return ResourceManager.GetString("HydroServerBulkUploadApiBaseAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to api/bulkupload/get.
+        /// </summary>
+        internal static string HydroServerBulkUploadApiGet {
+            get {
+                return ResourceManager.GetString("HydroServerBulkUploadApiGet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to api/bulkupload/post.
+        /// </summary>
+        internal static string HydroServerBulkUploadApiPost {
+            get {
+                return ResourceManager.GetString("HydroServerBulkUploadApiPost", resourceCulture);
             }
         }
         

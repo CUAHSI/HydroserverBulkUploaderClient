@@ -117,10 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="azure_BulkUploadBaseAddress" xml:space="preserve">
+    <value>https://dev-hydroserverbulkuploaderapi.azurewebsites.net/</value>
+  </data>
   <data name="BulkUploadApiBaseAddress" xml:space="preserve">
     <value>https://localhost:44364/</value>
   </data>
   <data name="MaxFileChunkBytes" xml:space="preserve">
     <value>8388608</value>
+  </data>
+  <data name="HydroServerBulkUploadApiBaseAddress" xml:space="preserve">
+    <value>http://localhost:15423/</value>
+  </data>
+  <data name="HydroServerBulkUploadApiGet" xml:space="preserve">
+    <value>api/bulkupload/get</value>
+  </data>
+  <data name="HydroServerBulkUploadApiPost" xml:space="preserve">
+    <value>api/bulkupload/post</value>
   </data>
 </root>
