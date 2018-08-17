@@ -164,11 +164,20 @@ namespace HydroserverBulkUploaderClient
                             using (HttpClient httpClient = new HttpClient())
                             {
                                 //Base address...
-                                httpClient.BaseAddress = new Uri(HydroshareBulkUploaderClient.BulkUploadApiBaseAddress);
+                                //httpClient.BaseAddress = new Uri(HydroshareBulkUploaderClient.BulkUploadApiBaseAddress);
+                                //httpClient.BaseAddress = new Uri(HydroshareBulkUploaderClient.azure_BulkUploadBaseAddress);
+                                httpClient.BaseAddress = new Uri(HydroshareBulkUploaderClient.HydroServerBulkUploadApiBaseAddress);
+
                                 //User agent...
                                 httpClient.DefaultRequestHeaders.Add("User-Agent", "CUAHSI Bulk Uploader Client");
                                 //Connection...
                                 httpClient.DefaultRequestHeaders.Add("Connection", "keep-alive");
+
+                                //For now - add a 'dummy' upload Id...
+                                httpClient.DefaultRequestHeaders.Add("X-Api-BulkUpload-UploadId", "abcd-1234");
+
+                                //Add validation qualifier...
+                                httpClient.DefaultRequestHeaders.Add("X-Api-BulkUpload-ValidationQualifier", "bulk-upload");
 
                                 var strBoundary = String.Format("----------Boundary{0:N}", Guid.NewGuid()); //Format GUID as 32 digits...
                                 using (var content = new MultipartFormDataContent(strBoundary))
@@ -190,7 +199,10 @@ namespace HydroserverBulkUploaderClient
                                     content.Add(byteContent, "files", fileName);
 
                                     //Post content...
-                                    HttpResponseMessage response = httpClient.PostAsync("Hydroserver/BulkUploadApi/", content, cancellationToken).Result;
+                                    //HttpResponseMessage response = httpClient.PostAsync("Hydroserver/BulkUploadApi/", content, cancellationToken).Result;
+                                    HttpResponseMessage response = httpClient.PostAsync(HydroshareBulkUploaderClient.HydroServerBulkUploadApiPost, 
+                                                                                        content, 
+                                                                                        cancellationToken).Result;
                                     if (response.IsSuccessStatusCode)
                                     {
                                         Console.WriteLine("");
@@ -257,10 +269,14 @@ namespace HydroserverBulkUploaderClient
             {
                 using (HttpClient httpClient = new HttpClient())
                 {
+                    //httpClient.BaseAddress = new Uri(HydroshareBulkUploaderClient.BulkUploadApiBaseAddress);
                     httpClient.BaseAddress = new Uri(HydroshareBulkUploaderClient.BulkUploadApiBaseAddress);
+
                     HttpContent httpContent = new MultipartFormDataContent("myBoundaryString");
 
-                    httpResponseMsg = await httpClient.PostAsync("Hydroserver/BulkUploadApi/", httpContent, cancellationToken);
+                    //httpResponseMsg = await httpClient.PostAsync("Hydroserver/BulkUploadApi/", httpContent, cancellationToken);
+                    httpResponseMsg = await httpClient.PostAsync("api/bulkupload/", httpContent, cancellationToken);
+
                     if (httpResponseMsg.IsSuccessStatusCode)
                     {
                         Console.WriteLine("");
